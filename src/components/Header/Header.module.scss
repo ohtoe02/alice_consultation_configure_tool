@@ -1,0 +1,50 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .menu {
+      list-style-type: none;
+      display: flex;
+      justify-content: space-around;
+
+      >li {
+        display: inline-block;
+        padding: 0 16px;
+
+        $underline_width: 0px;
+
+        >a {
+          display: block;
+          font-size: 20px;
+          color: #0B1F35;
+          text-decoration: none;
+          transition: all 150ms ease-out;
+
+          &:hover {
+            color: #EF3124;
+          }
+        }
+
+        >div {
+          width: 0;
+          margin: auto;
+          background-color: #EF3124;
+          height: 2px;
+          border-radius: 1rem;
+          transition: all 150ms ease-out;
+        }
+
+        >a:hover ~ div{
+            width: 100%
+        }
+      }
+    }
+  }
+}
