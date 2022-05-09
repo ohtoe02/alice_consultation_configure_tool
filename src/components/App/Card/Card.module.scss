@@ -22,6 +22,8 @@
   position: relative;
   align-items: center;
   justify-content: center;
+  user-select: none;
+
 
   &:after {
     content: '';

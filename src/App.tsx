@@ -3,9 +3,9 @@ import { getAnalytics } from "firebase/analytics";
 import React from 'react';
 import './App.scss';
 import Header from "./components/Header/Header";
-import Card from "./components/App/Card/Card";
-import Main from "./layouts/main"
 import StatesPage from "./components/StatesPage/StatesPage";
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
+import DialogsPage from "./components/DialogsPage/DialogsPage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC7DIzFCt02mY2KhW8FAmw6n5qp8jTHx38",
@@ -24,29 +24,15 @@ const analytics = getAnalytics(app);
 
 const App: React.FC = () => {
   return (
-      <div>
+      <BrowserRouter>
           <Header />
-          <StatesPage />
-      </div>
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.tsx</code> and save to reload.
-    //     </p>
-    //     <div>
-    //       Some new text here!
-    //     </div>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
+          <div>
+              <Routes>
+                  <Route path="/" element={<StatesPage />} />
+                  <Route path="dialogs/" element={<DialogsPage />} />
+              </Routes>
+          </div>
+      </BrowserRouter>
   );
 }
 

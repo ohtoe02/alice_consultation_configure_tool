@@ -1,5 +1,6 @@
 import styles from "./Header.module.scss"
 import React from "react";
+import { Link } from "react-router-dom"
 
 const menu = [
     {
@@ -12,7 +13,7 @@ const menu = [
     },
     {
         title: "Диалоги",
-        link: "/",
+        link: "dialogs",
     },
     {
         title: "Дисциплины",
@@ -35,7 +36,7 @@ const Header = () => {
                 <ul className={styles.menu}>
                     {menu.map((item, idx) => (
                         <li key={idx}>
-                            <a href={item.link}>{item.title}</a>
+                            <Link to={item.link}>{item.title}</Link>
                             <div />
                         </li>
                     ))}
@@ -45,16 +46,5 @@ const Header = () => {
         </div>
     )
 };
-
-// @ts-ignore
-// const NavBarIcon = ( icon ) => {
-//
-//     return (
-//         <div className="navbar-icon group">
-//             <p>{icon}</p>
-//             <span className={"navbar-chosen-item-underline group-hover:w-full"}/>
-//         </div>
-//     )
-// }
 
 export default Header;
