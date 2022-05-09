@@ -31,7 +31,6 @@ const menu = [
 const Header = () => {
     return (
         <div className={styles.header}>
-            {/*<div className="fixed flex flex-row w-4/5 justify-around h-16">*/}
             <div className={styles.wrapper}>
                 <ul className={styles.menu}>
                     {menu.map((item, idx) => (
@@ -41,14 +40,8 @@ const Header = () => {
                         </li>
                     ))}
                 </ul>
-                {/*<NavBarIcon icon={"Параметры"}/>*/}
-                {/*<NavBarIcon icon={"Добавить"}/>*/}
-                {/*<NavBarIcon icon={"Диалоги"}/>*/}
-                {/*<NavBarIcon icon={"Дисциплины"}/>*/}
-                {/*<NavBarIcon icon={"Институты"}/>*/}
-                {/*<NavBarIcon icon={"Выход"}/>*/}
-                <span className="navbar-underline" />
             </div>
+            <div className={styles["navbar-underline"]} />
         </div>
     )
 };

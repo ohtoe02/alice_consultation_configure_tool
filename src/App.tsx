@@ -3,8 +3,9 @@ import { getAnalytics } from "firebase/analytics";
 import React from 'react';
 import './App.scss';
 import Header from "./components/Header/Header";
-import Card from "./components/states_page";
+import Card from "./components/App/Card/Card";
 import Main from "./layouts/main"
+import StatesPage from "./components/StatesPage/StatesPage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC7DIzFCt02mY2KhW8FAmw6n5qp8jTHx38",
@@ -20,11 +21,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
+
 const App: React.FC = () => {
   return (
       <div>
           <Header />
-          <Card title={"Главная"}/>
+          <StatesPage />
       </div>
     // <div className="App">
     //   <header className="App-header">
