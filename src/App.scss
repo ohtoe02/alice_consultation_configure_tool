@@ -4,18 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .navbar-icon {
-    @apply relative flex justify-center cursor-pointer text-black-main text-[20px] hover:text-accent-red outline-2 h-min mx-[4px] my-auto transition-all;
-    font-family: Inter, serif;
-    padding: 0 4px;
-    font-weight: 400;
-  }
-
-  .navbar-chosen-item-underline {
-    @apply absolute bottom-0 h-[2px] bg-accent-red rounded transition-all duration-100;
-    width: 0;
-  }
+.background {
+  background: linear-gradient(180deg, #FFFFFF 8.33%, #F3F3F2 43.75%);
+  height: 100vh;
 }
 
 .App {

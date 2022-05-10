@@ -1,0 +1,60 @@
+.header {
+  position: relative;
+  margin: auto;
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 80px;
+  row-gap: 16px;
+  padding: 16px 0;
+  user-select: none;
+
+
+  .nav-link {
+    display: block;
+    font-size: 20px;
+    color: #0B1F35;
+    text-decoration: none;
+    transition: all 150ms ease-out;
+
+    &:hover {
+      color: #EF3124;
+    }
+
+    .chosen {
+      width: 0;
+      margin: auto;
+      background-color: #EF3124;
+      height: 2px;
+      border-radius: 1rem;
+      transition: all 150ms ease-out;
+    }
+
+    &:hover {
+      .chosen {
+        width: 100%
+      }
+    }
+  }
+
+  .active {
+    color: #EF3124;
+  }
+
+  .nav-link:hover ~ .chosen {
+      width: 100%
+  }
+
+  .navbar-underline {
+    position: absolute;
+    bottom: 0;
+    width: 60%;
+    height: 4px;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(120, 130, 141, 0.1) 61.98%, rgba(196, 196, 196, 0) 100%);
+    border-radius: 12px;
+  }
+}
+
+

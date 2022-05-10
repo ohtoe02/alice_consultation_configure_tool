@@ -3,20 +3,20 @@ $medium: 820px;
 $big: 1240px;
 $biggest: 1660px;
 
-.wrapper {
+.container {
   padding: 32px 0;
+  min-width: 320px;
+  max-width: 1328px;
+  margin: auto;
 
   .states-wrapper {
     height: 100%;
-    min-width: 320px;
-    max-width: 1328px;
-    margin: auto;
     padding: 48px 0;
+    margin: auto;
     display: grid;
     row-gap: 24px;
     column-gap: 16px;
     grid-template-columns: repeat(4, 320px);
-    //background-color: #61dafb;
     transition: 300ms;
 
     @media only screen and (max-width: $biggest) {

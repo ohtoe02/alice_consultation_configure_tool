@@ -13,14 +13,14 @@ const states = [
     },
     {
         title: "Профиль",
-        imgURL: "https://www.activetraffic.ru/upload/medialibrary/12e/12efaef75068c96be00f903dd8dda23c.png"
+        imgURL: "https://images.twinkl.co.uk/tw1n/image/private/t_630/image_repo/9d/62/T-S-2469-My-One-Page-Profile-Secondary.jpg"
     },
 ]
 
 // @ts-ignore
 const StatesPage = () => {
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.container}>
             <div className={styles["header-text"]}>
                 Состояния диалога
             </div>

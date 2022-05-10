@@ -1,11 +1,15 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+
 import React from 'react';
 import './App.scss';
-import Header from "./components/Header/Header";
+import MainLayout from "./layouts/MainLayout"
+import Header from "./components/App/Header/Header";
 import StatesPage from "./components/StatesPage/StatesPage";
 import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 import DialogsPage from "./components/DialogsPage/DialogsPage";
+import DialogAddPage from "./components/DialogAddPage/DialogAddPage";
+import DialogEditPage from "./components/DialogEditPage/DialogEditPage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC7DIzFCt02mY2KhW8FAmw6n5qp8jTHx38",
@@ -25,13 +29,15 @@ const analytics = getAnalytics(app);
 const App: React.FC = () => {
   return (
       <BrowserRouter>
-          <Header />
-          <div>
-              <Routes>
-                  <Route path="/" element={<StatesPage />} />
-                  <Route path="dialogs/" element={<DialogsPage />} />
-              </Routes>
-          </div>
+          <Routes>
+              <Route path="/" element={<MainLayout />} >
+                  <Route index element={<StatesPage />} />
+                  <Route path="dialogs" element={<DialogsPage />} />
+                  <Route path="dialogs/:dialogID" element={<DialogEditPage />} />
+                  <Route path="dialog-edit" element={<DialogAddPage />} />
+                  <Route path="*" element={<StatesPage />} />
+              </Route>
+          </Routes>
       </BrowserRouter>
   );
 }

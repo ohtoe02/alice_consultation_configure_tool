@@ -1,6 +1,7 @@
 import styles from "./Header.module.scss"
+import "./Header.css"
 import React from "react";
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 const menu = [
     {
@@ -9,7 +10,7 @@ const menu = [
     },
     {
         title: "Добавить",
-        link: "/",
+        link: "dialog-edit",
     },
     {
         title: "Диалоги",
@@ -17,33 +18,26 @@ const menu = [
     },
     {
         title: "Дисциплины",
-        link: "/",
+        link: "disciplines",
     },
     {
         title: "Институты",
-        link: "/",
+        link: "institutes",
     },
     {
         title: "Выход",
-        link: "/",
+        link: "exit",
     },
 ]
 
 const Header = () => {
     return (
-        <div className={styles.header}>
-            <div className={styles.wrapper}>
-                <ul className={styles.menu}>
-                    {menu.map((item, idx) => (
-                        <li key={idx}>
-                            <Link to={item.link}>{item.title}</Link>
-                            <div />
-                        </li>
-                    ))}
-                </ul>
-            </div>
+        <header className={styles.header}>
+            {menu.map((item, idx) => (
+                <NavLink className={styles["nav-link"]} to={item.link}>{item.title}<div className={styles.chosen} /></NavLink>
+            ))}
             <div className={styles["navbar-underline"]} />
-        </div>
+        </header>
     )
 };
 
