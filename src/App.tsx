@@ -4,12 +4,11 @@ import { getAnalytics } from "firebase/analytics";
 import React from 'react';
 import './App.scss';
 import MainLayout from "./layouts/MainLayout"
-import Header from "./components/App/Header/Header";
 import StatesPage from "./components/StatesPage/StatesPage";
-import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
-import DialogsPage from "./components/DialogsPage/DialogsPage";
-import DialogAddPage from "./components/DialogAddPage/DialogAddPage";
-import DialogEditPage from "./components/DialogEditPage/DialogEditPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DisciplinesPage from "./components/DisciplinesPage/DisciplinesPage";
+import DisciplineAddPage from "./components/DisciplineAddPage/DisciplineAddPage";
+import DisciplineEditPage from "./components/DisciplineEditPage/DisciplineEditPage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC7DIzFCt02mY2KhW8FAmw6n5qp8jTHx38",
@@ -32,9 +31,9 @@ const App: React.FC = () => {
           <Routes>
               <Route path="/" element={<MainLayout />} >
                   <Route index element={<StatesPage />} />
-                  <Route path="dialogs" element={<DialogsPage />} />
-                  <Route path="dialogs/:dialogID" element={<DialogEditPage />} />
-                  <Route path="dialog-edit" element={<DialogAddPage />} />
+                  <Route path="disciplines" element={<DisciplinesPage />} />
+                  <Route path="disciplines/:dialogID" element={<DisciplineEditPage />} />
+                  <Route path="new-discipline" element={<DisciplineAddPage />} />
                   <Route path="*" element={<StatesPage />} />
               </Route>
           </Routes>

@@ -10,7 +10,7 @@ const menu = [
     },
     {
         title: "Добавить",
-        link: "dialog-edit",
+        link: "new-discipline",
     },
     {
         title: "Диалоги",
@@ -34,7 +34,7 @@ const Header = () => {
     return (
         <header className={styles.header}>
             {menu.map((item, idx) => (
-                <NavLink className={styles["nav-link"]} to={item.link}>{item.title}<div className={styles.chosen} /></NavLink>
+                <NavLink key={idx} className={styles["nav-link"]} to={item.link}>{item.title}<div className={styles.chosen} /></NavLink>
             ))}
             <div className={styles["navbar-underline"]} />
         </header>

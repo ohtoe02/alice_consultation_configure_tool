@@ -1,11 +1,12 @@
-import styles from "./DialogsPage.module.scss"
+import styles from "./DisciplinesPage.module.scss"
 import Card from "../App/Card/Card"
 import AddCard from "../App/Card/AddCard"
+import Loader from "../App/Loader/Loader"
 import { getDatabase, ref, get, child } from "firebase/database";
 import React, {useEffect, useState} from "react";
-import {Routes, Route} from 'react-router-dom'
 
-const DialogsPage = () => {
+
+const DisciplinesPage = () => {
     const [dialogs, setDialogs] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -13,10 +14,10 @@ const DialogsPage = () => {
         const fetchData = async () => {
             try {
                 const db = getDatabase();
-                const items = (await get(child(ref(db), 'dialogs'))).val() || {};
+                const items = (await get(child(ref(db), 'dialogs/courses'))).val() || {};
 
                 const res: Object[] = [];
-                Object.keys(items).map(key => (res.push(items[key])))
+                Object.keys(items).map(key => (key === 'custom_dialogs' ? '' : res.push(items[key])))
                 // @ts-ignore
                 setDialogs(res)
             }
@@ -35,7 +36,7 @@ const DialogsPage = () => {
             <div className={styles["header-text"]}>
                 Диалоги
             </div>
-            {loading && 'Загрузка'}
+            {loading && <Loader />}
             <div className={styles['states-wrapper']}>
                 {dialogs.map((state, idx) => (
                     <Card title={state['title']} imgUrl={state['imgURL']} dialogID={state['id']} key={idx} />
@@ -46,4 +47,4 @@ const DialogsPage = () => {
     )
 }
 
-export default DialogsPage
+export default DisciplinesPage

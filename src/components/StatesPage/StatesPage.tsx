@@ -28,7 +28,6 @@ const StatesPage = () => {
                 {states.map((state, idx) => (
                     <Card title={state.title} imgUrl={state.imgURL} key={idx} />
                 ))}
-                <AddCard />
             </div>
         </div>
     )
