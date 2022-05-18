@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DisciplinesPage from "./components/DisciplinesPage/DisciplinesPage";
 import DisciplineAddPage from "./components/DisciplineAddPage/DisciplineAddPage";
 import DisciplineEditPage from "./components/DisciplineEditPage/DisciplineEditPage";
+import LogsPage from "./components/LogsPage/LogsPage";
+import ShowLogsPage from "./components/ShowLogsPage/ShowLogsPage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC7DIzFCt02mY2KhW8FAmw6n5qp8jTHx38",
@@ -32,6 +34,8 @@ const App: React.FC = () => {
               <Route path="/" element={<MainLayout />} >
                   <Route index element={<StatesPage />} />
                   <Route path="disciplines" element={<DisciplinesPage />} />
+                  <Route path="logs" element={<LogsPage />} />
+                  <Route path="logs/user/:userID" element={<ShowLogsPage />} />
                   <Route path="disciplines/:dialogID" element={<DisciplineEditPage />} />
                   <Route path="new-discipline" element={<DisciplineAddPage />} />
                   <Route path="*" element={<StatesPage />} />

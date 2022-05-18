@@ -2,17 +2,18 @@ import styles from "./DisciplineEditPage.module.scss"
 import {BiLandscape} from "react-icons/bi";
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
-import {child, get, getDatabase, ref, push, set} from "firebase/database";
+import {child, get, getDatabase, ref, update} from "firebase/database";
 import Loader from "../App/Loader/Loader"
 
 // @ts-ignore
 const DisciplineEditPage = () => {
     const { dialogID } = useParams();
     const [dialog, setDialog] = useState({
-        title: 'undefined',
+        title: '',
         full_description: '',
         short_description: '',
         number: '',
+        id: '',
         params: {
             budget_places: '',
             price: '',
@@ -86,11 +87,7 @@ const DisciplineEditPage = () => {
 
         const db = getDatabase()
 
-        const discipline = await push(ref(db, `dialogs/courses`), template)
-        await set(ref(db, `refs/${discipline.key}`), discipline.key)
-        await set(ref(db, `dialogs/courses/${discipline.key}/id`), discipline.key)
-
-
+        await update(child(ref(db), `dialogs/courses/${dialog.id}`), template)
     }
 
     return (
@@ -122,7 +119,7 @@ const DisciplineEditPage = () => {
                             </label>
                             <label className={styles.wide}>
                                 Краткое описание*
-                                <input className={[styles.input, styles["default-height"]].join(' ')} value={dialog.short_description} name={"short_description"} onChange={e => handleInputUpdate(e)} required/>
+                                <input className={[styles.input, styles["default-height"]].join(' ')} value={inputs.short_description} name={"short_description"} onChange={e => handleInputUpdate(e)} required/>
                             </label>
                             <label>
                                 Форма обучения

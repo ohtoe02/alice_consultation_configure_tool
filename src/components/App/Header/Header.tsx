@@ -21,8 +21,8 @@ const menu = [
         link: "disciplines",
     },
     {
-        title: "Институты",
-        link: "institutes",
+        title: "Запросы",
+        link: "logs",
     },
     {
         title: "Выход",

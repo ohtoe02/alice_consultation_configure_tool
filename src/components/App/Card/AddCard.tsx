@@ -1,12 +1,14 @@
 import styles from "./Card.module.scss"
 import React from "react";
 import {VscAdd} from "react-icons/vsc";
+import { Link } from "react-router-dom"
+
 
 const AddCard = () => {
     return (
-        <div className={styles["add-card"]}>
+        <Link to={"/new-discipline"} className={styles["add-card"]}>
             <VscAdd size={"64"} className={styles.plus}/>
-        </div>
+        </Link>
     )
 };
 

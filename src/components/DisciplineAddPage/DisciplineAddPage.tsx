@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import {child, get, getDatabase, push, ref, set} from "firebase/database";
 import Loader from "../App/Loader/Loader";
-import {Simulate} from "react-dom/test-utils";
 
 // @ts-ignore
 const DisciplineAddPage = () => {
@@ -31,6 +30,21 @@ const DisciplineAddPage = () => {
         setInputs(values => ({...values, [name]: value}))
     }
 
+    const resetForm = async (e: any) => {
+        e.preventDefault();
+        setInputs({
+            title: '',
+            budget_places: '',
+            full_description: '',
+            short_description: '',
+            number: '',
+            pass_score: '',
+            price: '',
+            leader: '',
+            edu_form: '',
+        })
+    }
+
     const submitForm = async (e: any) => {
         e.preventDefault();
         const template = {
@@ -52,7 +66,6 @@ const DisciplineAddPage = () => {
         const discipline = await push(ref(db, `dialogs/courses`), template)
         await set(ref(db, `refs/${discipline.key}`), discipline.key)
         await set(ref(db, `dialogs/courses/${discipline.key}/id`), discipline.key)
-
     }
 
 
@@ -70,44 +83,47 @@ const DisciplineAddPage = () => {
                         </div>
                     </div>
                     <div className={styles["editing-window"]}>
-                        <form className={styles.form} onSubmit={e => submitForm(e)}>
+                        <form className={styles.form} onSubmit={e => submitForm(e)} onReset={e => resetForm(e)}>
                             <label>
                                 Название*
-                                <input className={styles.input} name={"title"} onChange={e => handleInputUpdate(e)} required/>
+                                <input className={styles.input} value={inputs.title} name={"title"} onChange={e => handleInputUpdate(e)} required/>
                             </label>
                             <label>
                                 Номер*
-                                <input className={styles.input} name={"number"} onChange={e => handleInputUpdate(e)} required/>
+                                <input className={styles.input} value={inputs.number} name={"number"} onChange={e => handleInputUpdate(e)} required/>
                             </label>
                             <label className={styles.wide}>
                                 Полное описание*
-                                <textarea className={styles.input} name={"full_description"} onChange={e => handleInputUpdate(e)} required/>
+                                <textarea className={styles.input} value={inputs.full_description} name={"full_description"} onChange={e => handleInputUpdate(e)} required/>
                             </label>
                             <label className={styles.wide}>
                                 Краткое описание*
-                                <textarea className={[styles.input, styles["default-height"]].join(' ')} name={"short_description"} onChange={e => handleInputUpdate(e)} required/>
+                                <textarea className={[styles.input, styles["default-height"]].join(' ')} value={inputs.short_description} name={"short_description"} onChange={e => handleInputUpdate(e)} required/>
                             </label>
                             <label>
                                 Форма обучения
-                                <input className={styles.input} name={"edu_form"} onChange={e => handleInputUpdate(e)}/>
+                                <input className={styles.input} name={"edu_form"} value={inputs.edu_form} onChange={e => handleInputUpdate(e)}/>
                             </label>
                             <label>
                                 Бюджетных мест
-                                <input className={styles.input} name={"budget_places"} onChange={e => handleInputUpdate(e)}/>
+                                <input className={styles.input} name={"budget_places"} value={inputs.budget_places} onChange={e => handleInputUpdate(e)}/>
                             </label>
                             <label>
                                 Стоимость
-                                <input className={styles.input} name={"price"} onChange={e => handleInputUpdate(e)}/>
+                                <input className={styles.input} name={"price"} value={inputs.price} onChange={e => handleInputUpdate(e)}/>
                             </label>
                             <label>
                                 Проходной балл в 2021
-                                <input className={styles.input} name={"pass_score"} onChange={e => handleInputUpdate(e)}/>
+                                <input className={styles.input} name={"pass_score"} value={inputs.pass_score} onChange={e => handleInputUpdate(e)}/>
                             </label>
                             <label className={styles.wide}>
                                 Руководитель
-                                <input className={styles.input} name={"leader"} onChange={e => handleInputUpdate(e)}/>
+                                <input className={styles.input} name={"leader"} value={inputs.leader} onChange={e => handleInputUpdate(e)}/>
                             </label>
                             <div className={styles["button-wrapper"]}>
+                                <button className={styles["reset-button"]} type={"reset"} value={"Reset"} >
+                                    Сбросить
+                                </button>
                                 <button className={styles["submit-button"]} type={"submit"} value={"Submit"} >
                                     Добавить
                                 </button>

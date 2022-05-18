@@ -103,6 +103,11 @@ $biggest: 1660px;
           background: #A6FFA9;
           border-radius: 8px;
         }
+
+        .reset-button {
+          @extend .submit-button;
+          background: #FF756B ;
+        }
       }
     }
 
@@ -159,6 +164,7 @@ $biggest: 1660px;
         width: 100%;
         text-align: center;
         transform: translate(-50%);
+        user-select: none;
       }
     }
   }
