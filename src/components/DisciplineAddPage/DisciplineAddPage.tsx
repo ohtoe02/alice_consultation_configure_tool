@@ -64,7 +64,7 @@ const DisciplineAddPage = () => {
         const db = getDatabase()
 
         const discipline = await push(ref(db, `dialogs/courses`), template)
-        await set(ref(db, `refs/${discipline.key}`), discipline.key)
+        await set(ref(db, `refs/${template.title}`), discipline.key)
         await set(ref(db, `dialogs/courses/${discipline.key}/id`), discipline.key)
     }
 

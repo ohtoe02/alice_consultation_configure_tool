@@ -17,7 +17,11 @@ const LogsPage = () => {
                 const items = (await get(child(ref(db), 'requests/users'))).val() || {};
 
                 const res: Object[] = [];
-                Object.keys(items).map(key => (res.push(items[key])))
+                Object.keys(items).map(key => {
+                    Object.keys(items[key]).map(reqId => {
+                        res.push(items[key][reqId])
+                    })
+                })
                 // @ts-ignore
                 setUsersLogs(res)
             }
@@ -31,6 +35,18 @@ const LogsPage = () => {
         fetchData();
     }, [])
 
+    const getUniqueItems = () => {
+        console.log(usersLogs);
+        // @ts-ignore
+        const arrayUniqueByKey = [...new Map(usersLogs.map(item =>
+            [item["request"], item])).values()];
+        return arrayUniqueByKey.sort(function(a, b){
+            if(a.request < b.request) { return -1; }
+            if(a.request > b.request) { return 1; }
+            return 0;
+        });
+    }
+
 
     return (
         <div className={styles.container}>
@@ -39,19 +55,7 @@ const LogsPage = () => {
             </div>
             {loading && <Loader />}
             <div className={styles['logs-wrapper']}>
-                {usersLogs.map((records, idx) => {
-                    const key = "request";
-                    const recList: any[] = []
-                    Object.keys(records).map(key => (recList.push(records[key])))
-                    // @ts-ignore
-                    const arrayUniqueByKey = [...new Map(recList.map(item =>
-                        [item[key], item])).values()];
-                    return (<UserLogs records={arrayUniqueByKey.sort(function(a, b){
-                        if(a.firstname < b.firstname) { return -1; }
-                        if(a.firstname > b.firstname) { return 1; }
-                        return 0;
-                    })} key={idx}/>)
-                })}
+                <UserLogs records={getUniqueItems()} />
             </div>
         </div>
     )

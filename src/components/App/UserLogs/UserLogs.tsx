@@ -1,14 +1,15 @@
 import styles from "./UserLogs.module.scss"
-import React from "react";
-import { Link } from "react-router-dom"
-import {Collapse, List, ListItem, ListItemText, ThemeProvider} from "@mui/material";
+import React, { useState, useEffect } from "react";
+import Pagination from '@mui/material/Pagination';
+import {Collapse, List, ListItem, ListItemText} from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material";
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
 
 // @ts-ignore
 const Log = ({record}) => {
-    const [isOpen, setOpen] = React.useState(false);
+    const [isOpen, setOpen] = useState(false);
 
     const handleClick = () => {
         setOpen(!isOpen);
@@ -31,22 +32,67 @@ const Log = ({record}) => {
     )
 }
 
+declare module '@mui/material/styles' {
+    interface Palette {
+        red: Palette['primary'];
+    }
+    interface PaletteOptions {
+        red: PaletteOptions['primary'];
+    }
+}
+
+declare module '@mui/material/Pagination' {
+    interface PaginationPropsColorOverrides {
+        red: true;
+    }
+}
+
+const theme = createTheme({
+    palette: {
+        red: {
+            main: '#ef584c',
+            contrastText: '#fff',
+        },
+    },
+});
+
 // @ts-ignore
 const UserLogs = ({records}) => {
-
     // const recList: any[] = []
     // Object.keys(records).map(key => (recList.push(records[key])))
+    const [currentData, setCurrentData] = useState([]);
+    const [page, setPage] = useState(1);
+    const [pageQty, setPageQty] = useState(0);
+    const [itemsQty, setItemsQty] = useState(20);
 
+    useEffect(() => {
+        const records_count = records.length;
+        const temp_pages = Math.ceil(records_count / itemsQty);
+        setPageQty(temp_pages);
+        const last_index = Math.min(itemsQty * page, records_count)
+        const first_index = Math.max(itemsQty * (page - 1), 0);
+        setCurrentData(records.slice(first_index, last_index))
+    }, [itemsQty, page, pageQty, records]);
+
+    const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value);
+    };
 
     return (
         <div className={styles.wrapper}>
+            <ThemeProvider theme={theme} >
+                <Pagination style={{margin: "auto"}} page={page} count={pageQty} shape={"rounded"} variant={"outlined"} color={"red"} onChange={handlePageChange} />
+            </ThemeProvider>
             <List style={{width: "100%"}}>
-                {records.map((record: any, idx: React.Key | null | undefined) =>
+                {currentData.map((record: any, idx: React.Key | null | undefined) =>
                     (record.request
                         ? <Log record={record} key={idx} />
                         : '')
                 )}
             </List>
+            <ThemeProvider theme={theme} >
+                <Pagination style={{margin: "auto"}} page={page} count={pageQty} shape={"rounded"} variant={"outlined"} color={"red"} onChange={handlePageChange} />
+            </ThemeProvider>
         </div>
     )
 };

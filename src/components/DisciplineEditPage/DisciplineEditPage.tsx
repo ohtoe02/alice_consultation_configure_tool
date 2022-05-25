@@ -2,7 +2,7 @@ import styles from "./DisciplineEditPage.module.scss"
 import {BiLandscape} from "react-icons/bi";
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
-import {child, get, getDatabase, ref, update} from "firebase/database";
+import {child, get, getDatabase, ref, update, remove, set} from "firebase/database";
 import Loader from "../App/Loader/Loader"
 
 // @ts-ignore
@@ -88,6 +88,8 @@ const DisciplineEditPage = () => {
         const db = getDatabase()
 
         await update(child(ref(db), `dialogs/courses/${dialog.id}`), template)
+        await remove(child(ref(db), `refs/${dialog.id}`))
+        await set(ref(db, `refs/${template.title}`), dialog.id)
     }
 
     return (
