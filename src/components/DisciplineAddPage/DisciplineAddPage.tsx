@@ -4,6 +4,8 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 import {child, get, getDatabase, push, ref, set} from "firebase/database";
 import Loader from "../App/Loader/Loader";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
 // @ts-ignore
 const DisciplineAddPage = () => {
@@ -18,7 +20,7 @@ const DisciplineAddPage = () => {
         leader: '',
         edu_form: '',
     });
-    const [uploading, setUploading] = useState(false)
+    const [isSuccess, setIsSuccess] = useState(false)
 
     const [loading, setLoading] = useState(true)
 
@@ -66,8 +68,15 @@ const DisciplineAddPage = () => {
         const discipline = await push(ref(db, `dialogs/courses`), template)
         await set(ref(db, `refs/${template.title}`), discipline.key)
         await set(ref(db, `dialogs/courses/${discipline.key}/id`), discipline.key)
+        setIsSuccess(true)
     }
 
+    const handleClose = (event : any, reason?: string) => {
+        if (reason === 'clickaway') {
+            return
+        }
+        setIsSuccess(false)
+    }
 
     return (
         <div className={styles.container}>
@@ -82,6 +91,18 @@ const DisciplineAddPage = () => {
                             <BiLandscape size={"40"} />
                         </div>
                     </div>
+                    <Snackbar
+                        open={isSuccess}
+                        autoHideDuration={3000}
+                        onClose={handleClose}
+                        message="Note archived"
+                        anchorOrigin={{ vertical: "top", horizontal: "right"}}
+                        key={"top" + "right"}
+                    >
+                        <Alert variant={"filled"} severity="success" sx={{background: "rgb(96,206,74)",fontFamily: "Inter, serif",  width: "fit-content"}}>
+                            Дисциплина была успешно добавлена!
+                        </Alert>
+                    </Snackbar>
                     <div className={styles["editing-window"]}>
                         <form className={styles.form} onSubmit={e => submitForm(e)} onReset={e => resetForm(e)}>
                             <label>
@@ -94,11 +115,11 @@ const DisciplineAddPage = () => {
                             </label>
                             <label className={styles.wide}>
                                 Полное описание*
-                                <textarea className={styles.input} value={inputs.full_description} name={"full_description"} onChange={e => handleInputUpdate(e)} required/>
+                                <textarea className={styles.input} maxLength={1023} value={inputs.full_description} name={"full_description"} onChange={e => handleInputUpdate(e)} required/>
                             </label>
                             <label className={styles.wide}>
                                 Краткое описание*
-                                <textarea className={[styles.input, styles["default-height"]].join(' ')} value={inputs.short_description} name={"short_description"} onChange={e => handleInputUpdate(e)} required/>
+                                <textarea className={[styles.input, styles["default-height"]].join(' ')} maxLength={1023} value={inputs.short_description} name={"short_description"} onChange={e => handleInputUpdate(e)} required/>
                             </label>
                             <label>
                                 Форма обучения

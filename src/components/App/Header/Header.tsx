@@ -4,10 +4,10 @@ import React from "react";
 import { NavLink } from "react-router-dom"
 
 const menu = [
-    {
-        title: "Параметры",
-        link: "/",
-    },
+    // {
+    //     title: "Параметры",
+    //     link: "/",
+    // },
     {
         title: "Добавить",
         link: "new-discipline",
@@ -18,7 +18,7 @@ const menu = [
     },
     {
         title: "Дисциплины",
-        link: "disciplines",
+        link: "/",
     },
     {
         title: "Запросы",

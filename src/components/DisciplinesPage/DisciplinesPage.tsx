@@ -10,6 +10,7 @@ const DisciplinesPage = () => {
     const [dialogs, setDialogs] = useState([])
     const [loading, setLoading] = useState(true)
 
+
     useEffect(() => {
         const fetchData = async () => {
             try {

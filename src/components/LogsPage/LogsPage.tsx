@@ -36,7 +36,6 @@ const LogsPage = () => {
     }, [])
 
     const getUniqueItems = () => {
-        console.log(usersLogs);
         // @ts-ignore
         const arrayUniqueByKey = [...new Map(usersLogs.map(item =>
             [item["request"], item])).values()];
@@ -55,7 +54,7 @@ const LogsPage = () => {
             </div>
             {loading && <Loader />}
             <div className={styles['logs-wrapper']}>
-                <UserLogs records={getUniqueItems()} />
+                <UserLogs records={getUniqueItems()} loading={loading} />
             </div>
         </div>
     )

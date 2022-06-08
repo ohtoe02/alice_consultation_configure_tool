@@ -11,6 +11,9 @@ import DisciplineAddPage from "./components/DisciplineAddPage/DisciplineAddPage"
 import DisciplineEditPage from "./components/DisciplineEditPage/DisciplineEditPage";
 import LogsPage from "./components/LogsPage/LogsPage";
 import ShowLogsPage from "./components/ShowLogsPage/ShowLogsPage";
+import DialogsPage from "./components/DialogsPage/DialogsPage";
+import DialogEditPage from "./components/DialogEditPage/DialogEditPage";
+import DialogAddPage from "./components/DialogAddPage/DialogAddPage";
 
 const firebaseConfig = {
     apiKey: "AIzaSyC7DIzFCt02mY2KhW8FAmw6n5qp8jTHx38",
@@ -32,7 +35,10 @@ const App: React.FC = () => {
       <BrowserRouter>
           <Routes>
               <Route path="/" element={<MainLayout />} >
-                  <Route index element={<StatesPage />} />
+                  <Route index element={<DisciplinesPage />} />
+                  <Route path="dialogs" element={<DialogsPage />} />
+                  <Route path="dialogs/edit/:dialogType/:dialogID" element={<DialogEditPage />} />
+                  <Route path="dialogs/add/:dialogType/" element={<DialogAddPage />} />
                   <Route path="disciplines" element={<DisciplinesPage />} />
                   <Route path="logs" element={<LogsPage />} />
                   <Route path="logs/user/:userID" element={<ShowLogsPage />} />

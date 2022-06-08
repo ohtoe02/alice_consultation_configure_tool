@@ -1,6 +1,5 @@
 import styles from "./StatesPage.module.scss"
 import Card from "../App/Card/Card"
-import AddCard from "../App/Card/AddCard"
 
 const states = [
     {

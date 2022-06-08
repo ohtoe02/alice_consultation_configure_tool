@@ -1,0 +1,74 @@
+$smallest: 400px;
+$medium: 820px;
+$big: 1240px;
+$biggest: 1660px;
+
+.container {
+  padding: 32px 32px;
+  min-width: 320px;
+  max-width: 1328px;
+  margin: auto;
+
+  .dialogs-wrapper {
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 48px;
+    background: #ffa5a5;
+    border-radius: 8px;
+    box-shadow: 2px 2px 2px rgba(40, 44, 52, 0.4);
+
+  }
+
+  .states-wrapper {
+    height: 100%;
+    padding: 48px 0;
+    margin: auto;
+    display: grid;
+    row-gap: 24px;
+    column-gap: 16px;
+    grid-template-columns: repeat(4, 320px);
+    transition: 300ms;
+
+    @media only screen and (max-width: $biggest) {
+      grid-template-columns: repeat(3, 320px);
+      width: 992px;
+    }
+
+    @media only screen and (max-width: $big) {
+      grid-template-columns: repeat(2, 320px);
+      width: 656px;
+    }
+
+    @media only screen and (max-width: $medium) {
+      grid-template-columns: repeat(1, 320px);
+      width: 320px;
+    }
+  }
+
+  .header-text {
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 100%;
+
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    user-select: none;
+
+    opacity: 0.6;
+
+    @media only screen and (max-width: $biggest) {
+      font-size: 80px;
+    }
+
+    @media only screen and (max-width: $big) {
+      font-size: 64px;
+    }
+
+    @media only screen and (max-width: $medium) {
+      font-size: 48px;
+    }
+  }
+}
